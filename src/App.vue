@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Coins Market</h1>
+  <InputSearch
+    @filter-value="filterValue"
+  />
+  <TableCoins
+    :filter="filter"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { defineAsyncComponent } from '@vue/runtime-core'
+  
 export default {
+
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    InputSearch: defineAsyncComponent( () => import ('@/components/InputSearch')),
+    TableCoins: defineAsyncComponent( () => import ('@/components/TableCoins.vue'))
+  },
+
+  data(){
+    return {
+      filter: ''
+    }
+  },
+
+  methods:{
+    filterValue( value ){
+      this.filter = value
+    }
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body{
+    
+    background-image: linear-gradient(90deg, #171717, #444444 );
+    color: #fff;
+  }
 </style>
